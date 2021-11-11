@@ -13,7 +13,7 @@ class Menu(models.Model):
 class Products(models.Model):
     kr_name = models.CharField(max_length=30)
     en_name = models.CharField(max_length=30)
-    information = models.TextField
+    information = models.TextField(default = '')
     menu_id = models.ForeignKey(Menu, on_delete = models.CASCADE)
     
     def __str__(self):
