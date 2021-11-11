@@ -15,7 +15,7 @@ class Products(models.Model):
     en_name = models.CharField(max_length=30)
     information = models.TextField(default = '')
     ingredients = models.ManyToManyField('Ingredients', related_name='product_ingredient')
-    menu_id = models.ForeignKey(Menu, on_delete = models.CASCADE)
+    menu = models.ForeignKey(Menu, on_delete = models.CASCADE)
     
     def __str__(self):
         return self.kr_name
@@ -24,7 +24,7 @@ class Products(models.Model):
 
 class Images(models.Model):
     url = models.TextField(default='')
-    product_id = models.ForeignKey(Products, on_delete = models.CASCADE)
+    product = models.ForeignKey(Products, on_delete = models.CASCADE)
     
     class Meta:
         db_table = 'images'
