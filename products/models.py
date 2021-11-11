@@ -14,6 +14,7 @@ class Products(models.Model):
     kr_name = models.CharField(max_length=30)
     en_name = models.CharField(max_length=30)
     information = models.TextField(default = '')
+    ingredients = models.ManyToManyField('Ingredients', related_name='product_ingredient')
     menu_id = models.ForeignKey(Menu, on_delete = models.CASCADE)
     
     def __str__(self):
@@ -35,10 +36,3 @@ class Ingredients(models.Model):
         return self.name
     class Meta:
         db_table = 'ingredients'
-
-class Product_ingredient(models.Model):
-    product_id = models.ForeignKey(Products, on_delete = models.CASCADE)
-    ingredient_id = models.ForeignKey(Ingredients, on_delete = models.CASCADE)
-
-    class Meta:
-        db_table = 'product_ingredient'
