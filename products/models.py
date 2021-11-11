@@ -23,7 +23,7 @@ class Products(models.Model):
         db_table = 'products'
 
 class Images(models.Model):
-    url = models.URLField
+    url = models.TextField(default='')
     product_id = models.ForeignKey(Products, on_delete = models.CASCADE)
     
     class Meta:
