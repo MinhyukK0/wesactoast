@@ -10,11 +10,11 @@ class Menu(models.Model):
     class Meta:
         db_table = 'menu'
 
-class Products(models.Model):
+class Product(models.Model):
     kr_name = models.CharField(max_length=30)
     en_name = models.CharField(max_length=30)
     information = models.TextField(default = '')
-    ingredients = models.ManyToManyField('Ingredients', related_name='product_ingredient')
+    ingredient = models.ManyToManyField('Ingredient')
     menu = models.ForeignKey(Menu, on_delete = models.CASCADE)
     
     def __str__(self):
@@ -22,14 +22,14 @@ class Products(models.Model):
     class Meta:
         db_table = 'products'
 
-class Images(models.Model):
+class Image(models.Model):
     url = models.TextField(default='')
-    product = models.ForeignKey(Products, on_delete = models.CASCADE)
+    product = models.ForeignKey(Product, on_delete = models.CASCADE)
     
     class Meta:
         db_table = 'images'
 
-class Ingredients(models.Model):
+class Ingredient(models.Model):
     name = models.CharField(max_length=30)
     
     def __str__(self):
