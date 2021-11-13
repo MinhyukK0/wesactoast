@@ -15,8 +15,9 @@ class ProductView(View):
                     'Menu' : product.menu.name ,
                     'Name' : product.kr_name ,
                     'Information' : product.information,
-                    'Image' : list(map(lambda x: x.url, product.image_set.all()))[0] ,
-                    'Ingredient' : list(map(lambda x: x.name, product.ingredient.all())),
+                    'Image' : [x.url for x in product.image_set.all()][0],
+                    'Ingredient' : [x.name for  x in product.ingredient.all()],
+                    
                 }
                 )
         return JsonResponse({"results": results}, status = 200)
