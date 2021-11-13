@@ -1,4 +1,5 @@
 import json
+from django.db.models.query import Prefetch
 from django.http import JsonResponse
 from django.views import View
 from django.shortcuts import render
@@ -7,7 +8,8 @@ from products.models import Menu, Product, Image, Ingredient
 # Create your views here.
 class ProductView(View):
     def get(self, request):
-        products = Product.objects.all()
+        ingredient = Ingredient.objects.all()
+        products = Product.objects.prefetch_related(Prefetch('ingredient', to_attr='ingredient.set()', queryset=ingredient)).all()
         results = []
         for product in products:
             results.append(
